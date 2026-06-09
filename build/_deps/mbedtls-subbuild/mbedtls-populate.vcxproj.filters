@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="18.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\antoi\Desktop\FOCWorld\focworld-client-cpp\build\_deps\mbedtls-subbuild\CMakeFiles\72458a8f4c55a0ce4a941b9429ee6a0c\mbedtls-populate-mkdir.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\antoi\Desktop\FOCWorld\focworld-client-cpp\build\_deps\mbedtls-subbuild\CMakeFiles\72458a8f4c55a0ce4a941b9429ee6a0c\mbedtls-populate-download.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\antoi\Desktop\FOCWorld\focworld-client-cpp\build\_deps\mbedtls-subbuild\CMakeFiles\72458a8f4c55a0ce4a941b9429ee6a0c\mbedtls-populate-update.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\antoi\Desktop\FOCWorld\focworld-client-cpp\build\_deps\mbedtls-subbuild\CMakeFiles\72458a8f4c55a0ce4a941b9429ee6a0c\mbedtls-populate-patch.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\antoi\Desktop\FOCWorld\focworld-client-cpp\build\_deps\mbedtls-subbuild\CMakeFiles\72458a8f4c55a0ce4a941b9429ee6a0c\mbedtls-populate-configure.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\antoi\Desktop\FOCWorld\focworld-client-cpp\build\_deps\mbedtls-subbuild\CMakeFiles\72458a8f4c55a0ce4a941b9429ee6a0c\mbedtls-populate-build.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\antoi\Desktop\FOCWorld\focworld-client-cpp\build\_deps\mbedtls-subbuild\CMakeFiles\72458a8f4c55a0ce4a941b9429ee6a0c\mbedtls-populate-install.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\antoi\Desktop\FOCWorld\focworld-client-cpp\build\_deps\mbedtls-subbuild\CMakeFiles\72458a8f4c55a0ce4a941b9429ee6a0c\mbedtls-populate-test.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\antoi\Desktop\FOCWorld\focworld-client-cpp\build\_deps\mbedtls-subbuild\CMakeFiles\6f1a66237569633d2f714a2802299a0d\mbedtls-populate-complete.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\antoi\Desktop\FOCWorld\focworld-client-cpp\build\_deps\mbedtls-subbuild\CMakeFiles\357cc1cf2641667aa63e77d9db1a8986\mbedtls-populate.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\antoi\Desktop\FOCWorld\focworld-client-cpp\build\_deps\mbedtls-subbuild\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Users\antoi\Desktop\FOCWorld\focworld-client-cpp\build\_deps\mbedtls-subbuild\CMakeFiles\mbedtls-populate" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{6CCE99AA-68F3-380E-A361-20CA1A2184C8}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

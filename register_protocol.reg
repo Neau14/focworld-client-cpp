@@ -1,0 +1,12 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_CLASSES_ROOT\foc-tcg]
+@="URL:FOC TCG Protocol"
+"URL Protocol"=""
+
+[HKEY_CLASSES_ROOT\foc-tcg\shell]
+
+[HKEY_CLASSES_ROOT\foc-tcg\shell\open]
+
+[HKEY_CLASSES_ROOT\foc-tcg\shell\open\command]
+@="\"C:\\Users\\antoi\\Desktop\\FOCWorld\\focworld-client-cpp\\build\\Debug\\focworld_tcg.exe\" \"%1\""

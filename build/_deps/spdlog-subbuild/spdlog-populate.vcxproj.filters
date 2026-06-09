@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="18.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\antoi\Desktop\FOCWorld\focworld-client-cpp\build\_deps\spdlog-subbuild\CMakeFiles\1cca91f163deabb6f4c12b5b2b0a1eee\spdlog-populate-mkdir.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\antoi\Desktop\FOCWorld\focworld-client-cpp\build\_deps\spdlog-subbuild\CMakeFiles\1cca91f163deabb6f4c12b5b2b0a1eee\spdlog-populate-download.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\antoi\Desktop\FOCWorld\focworld-client-cpp\build\_deps\spdlog-subbuild\CMakeFiles\1cca91f163deabb6f4c12b5b2b0a1eee\spdlog-populate-update.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\antoi\Desktop\FOCWorld\focworld-client-cpp\build\_deps\spdlog-subbuild\CMakeFiles\1cca91f163deabb6f4c12b5b2b0a1eee\spdlog-populate-patch.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\antoi\Desktop\FOCWorld\focworld-client-cpp\build\_deps\spdlog-subbuild\CMakeFiles\1cca91f163deabb6f4c12b5b2b0a1eee\spdlog-populate-configure.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\antoi\Desktop\FOCWorld\focworld-client-cpp\build\_deps\spdlog-subbuild\CMakeFiles\1cca91f163deabb6f4c12b5b2b0a1eee\spdlog-populate-build.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\antoi\Desktop\FOCWorld\focworld-client-cpp\build\_deps\spdlog-subbuild\CMakeFiles\1cca91f163deabb6f4c12b5b2b0a1eee\spdlog-populate-install.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\antoi\Desktop\FOCWorld\focworld-client-cpp\build\_deps\spdlog-subbuild\CMakeFiles\1cca91f163deabb6f4c12b5b2b0a1eee\spdlog-populate-test.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\antoi\Desktop\FOCWorld\focworld-client-cpp\build\_deps\spdlog-subbuild\CMakeFiles\a77fd22325154dddd518d28d73da2403\spdlog-populate-complete.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\antoi\Desktop\FOCWorld\focworld-client-cpp\build\_deps\spdlog-subbuild\CMakeFiles\3a5838bb4d9405583f6a8a93bd86a582\spdlog-populate.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\antoi\Desktop\FOCWorld\focworld-client-cpp\build\_deps\spdlog-subbuild\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Users\antoi\Desktop\FOCWorld\focworld-client-cpp\build\_deps\spdlog-subbuild\CMakeFiles\spdlog-populate" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{2DFC06DA-4C7E-336D-84E6-1C270896BFDB}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

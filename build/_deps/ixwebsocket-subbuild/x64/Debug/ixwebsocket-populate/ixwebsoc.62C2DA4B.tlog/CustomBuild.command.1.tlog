@@ -1,0 +1,150 @@
+^C:\USERS\ANTOI\DESKTOP\FOCWORLD\FOCWORLD-CLIENT-CPP\BUILD\_DEPS\IXWEBSOCKET-SUBBUILD\CMAKEFILES\8B2C5014EDE2EE17C904B62E8F153CBB\IXWEBSOCKET-POPULATE-MKDIR.RULE
+setlocal
+"C:\Program Files\Microsoft Visual Studio\18\Insiders\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -Dcfgdir=/Debug -P C:/Users/antoi/Desktop/FOCWorld/focworld-client-cpp/build/_deps/ixwebsocket-subbuild/ixwebsocket-populate-prefix/tmp/ixwebsocket-populate-mkdirs.cmake
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\18\Insiders\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E touch C:/Users/antoi/Desktop/FOCWorld/focworld-client-cpp/build/_deps/ixwebsocket-subbuild/ixwebsocket-populate-prefix/src/ixwebsocket-populate-stamp/Debug/ixwebsocket-populate-mkdir
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\ANTOI\DESKTOP\FOCWORLD\FOCWORLD-CLIENT-CPP\BUILD\_DEPS\IXWEBSOCKET-SUBBUILD\CMAKEFILES\8B2C5014EDE2EE17C904B62E8F153CBB\IXWEBSOCKET-POPULATE-DOWNLOAD.RULE
+setlocal
+cd C:\Users\antoi\Desktop\FOCWorld\focworld-client-cpp\build\_deps
+if %errorlevel% neq 0 goto :cmEnd
+C:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\18\Insiders\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -DCMAKE_MESSAGE_LOG_LEVEL=VERBOSE -P C:/Users/antoi/Desktop/FOCWorld/focworld-client-cpp/build/_deps/ixwebsocket-subbuild/ixwebsocket-populate-prefix/tmp/ixwebsocket-populate-gitclone.cmake
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\18\Insiders\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E touch C:/Users/antoi/Desktop/FOCWorld/focworld-client-cpp/build/_deps/ixwebsocket-subbuild/ixwebsocket-populate-prefix/src/ixwebsocket-populate-stamp/Debug/ixwebsocket-populate-download
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\ANTOI\DESKTOP\FOCWORLD\FOCWORLD-CLIENT-CPP\BUILD\_DEPS\IXWEBSOCKET-SUBBUILD\CMAKEFILES\8B2C5014EDE2EE17C904B62E8F153CBB\IXWEBSOCKET-POPULATE-UPDATE.RULE
+setlocal
+cd C:\Users\antoi\Desktop\FOCWorld\focworld-client-cpp\build\_deps\ixwebsocket-src
+if %errorlevel% neq 0 goto :cmEnd
+C:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\18\Insiders\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -Dcan_fetch=YES -DCMAKE_MESSAGE_LOG_LEVEL=VERBOSE -P C:/Users/antoi/Desktop/FOCWorld/focworld-client-cpp/build/_deps/ixwebsocket-subbuild/ixwebsocket-populate-prefix/tmp/ixwebsocket-populate-gitupdate.cmake
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\ANTOI\DESKTOP\FOCWORLD\FOCWORLD-CLIENT-CPP\BUILD\_DEPS\IXWEBSOCKET-SUBBUILD\CMAKEFILES\8B2C5014EDE2EE17C904B62E8F153CBB\IXWEBSOCKET-POPULATE-PATCH.RULE
+setlocal
+"C:\Program Files\Microsoft Visual Studio\18\Insiders\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E echo_append
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\18\Insiders\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E touch C:/Users/antoi/Desktop/FOCWorld/focworld-client-cpp/build/_deps/ixwebsocket-subbuild/ixwebsocket-populate-prefix/src/ixwebsocket-populate-stamp/Debug/ixwebsocket-populate-patch
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\ANTOI\DESKTOP\FOCWORLD\FOCWORLD-CLIENT-CPP\BUILD\_DEPS\IXWEBSOCKET-SUBBUILD\CMAKEFILES\8B2C5014EDE2EE17C904B62E8F153CBB\IXWEBSOCKET-POPULATE-CONFIGURE.RULE
+setlocal
+cd C:\Users\antoi\Desktop\FOCWorld\focworld-client-cpp\build\_deps\ixwebsocket-build
+if %errorlevel% neq 0 goto :cmEnd
+C:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\18\Insiders\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E echo_append
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\18\Insiders\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E touch C:/Users/antoi/Desktop/FOCWorld/focworld-client-cpp/build/_deps/ixwebsocket-subbuild/ixwebsocket-populate-prefix/src/ixwebsocket-populate-stamp/Debug/ixwebsocket-populate-configure
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\ANTOI\DESKTOP\FOCWORLD\FOCWORLD-CLIENT-CPP\BUILD\_DEPS\IXWEBSOCKET-SUBBUILD\CMAKEFILES\8B2C5014EDE2EE17C904B62E8F153CBB\IXWEBSOCKET-POPULATE-BUILD.RULE
+setlocal
+cd C:\Users\antoi\Desktop\FOCWorld\focworld-client-cpp\build\_deps\ixwebsocket-build
+if %errorlevel% neq 0 goto :cmEnd
+C:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\18\Insiders\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E echo_append
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\18\Insiders\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E touch C:/Users/antoi/Desktop/FOCWorld/focworld-client-cpp/build/_deps/ixwebsocket-subbuild/ixwebsocket-populate-prefix/src/ixwebsocket-populate-stamp/Debug/ixwebsocket-populate-build
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\ANTOI\DESKTOP\FOCWORLD\FOCWORLD-CLIENT-CPP\BUILD\_DEPS\IXWEBSOCKET-SUBBUILD\CMAKEFILES\8B2C5014EDE2EE17C904B62E8F153CBB\IXWEBSOCKET-POPULATE-INSTALL.RULE
+setlocal
+cd C:\Users\antoi\Desktop\FOCWorld\focworld-client-cpp\build\_deps\ixwebsocket-build
+if %errorlevel% neq 0 goto :cmEnd
+C:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\18\Insiders\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E echo_append
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\18\Insiders\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E touch C:/Users/antoi/Desktop/FOCWorld/focworld-client-cpp/build/_deps/ixwebsocket-subbuild/ixwebsocket-populate-prefix/src/ixwebsocket-populate-stamp/Debug/ixwebsocket-populate-install
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\ANTOI\DESKTOP\FOCWORLD\FOCWORLD-CLIENT-CPP\BUILD\_DEPS\IXWEBSOCKET-SUBBUILD\CMAKEFILES\8B2C5014EDE2EE17C904B62E8F153CBB\IXWEBSOCKET-POPULATE-TEST.RULE
+setlocal
+cd C:\Users\antoi\Desktop\FOCWorld\focworld-client-cpp\build\_deps\ixwebsocket-build
+if %errorlevel% neq 0 goto :cmEnd
+C:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\18\Insiders\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E echo_append
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\18\Insiders\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E touch C:/Users/antoi/Desktop/FOCWorld/focworld-client-cpp/build/_deps/ixwebsocket-subbuild/ixwebsocket-populate-prefix/src/ixwebsocket-populate-stamp/Debug/ixwebsocket-populate-test
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\ANTOI\DESKTOP\FOCWORLD\FOCWORLD-CLIENT-CPP\BUILD\_DEPS\IXWEBSOCKET-SUBBUILD\CMAKEFILES\255C9B05F9066437908658C06495935C\IXWEBSOCKET-POPULATE-COMPLETE.RULE
+setlocal
+"C:\Program Files\Microsoft Visual Studio\18\Insiders\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E make_directory C:/Users/antoi/Desktop/FOCWorld/focworld-client-cpp/build/_deps/ixwebsocket-subbuild/CMakeFiles/Debug
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\18\Insiders\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E touch C:/Users/antoi/Desktop/FOCWorld/focworld-client-cpp/build/_deps/ixwebsocket-subbuild/CMakeFiles/Debug/ixwebsocket-populate-complete
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\18\Insiders\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E touch C:/Users/antoi/Desktop/FOCWorld/focworld-client-cpp/build/_deps/ixwebsocket-subbuild/ixwebsocket-populate-prefix/src/ixwebsocket-populate-stamp/Debug/ixwebsocket-populate-done
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\ANTOI\DESKTOP\FOCWORLD\FOCWORLD-CLIENT-CPP\BUILD\_DEPS\IXWEBSOCKET-SUBBUILD\CMAKEFILES\8CAB2790DDA50D80C93F85D0C305FDE5\IXWEBSOCKET-POPULATE.RULE
+setlocal
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\ANTOI\DESKTOP\FOCWORLD\FOCWORLD-CLIENT-CPP\BUILD\_DEPS\IXWEBSOCKET-SUBBUILD\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\Microsoft Visual Studio\18\Insiders\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/Users/antoi/Desktop/FOCWorld/focworld-client-cpp/build/_deps/ixwebsocket-subbuild -BC:/Users/antoi/Desktop/FOCWorld/focworld-client-cpp/build/_deps/ixwebsocket-subbuild --check-stamp-file C:/Users/antoi/Desktop/FOCWorld/focworld-client-cpp/build/_deps/ixwebsocket-subbuild/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

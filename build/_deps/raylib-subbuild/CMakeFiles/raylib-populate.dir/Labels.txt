@@ -1,0 +1,14 @@
+# Target labels
+ raylib-populate
+# Source files and their labels
+C:/Users/antoi/Desktop/FOCWorld/focworld-client-cpp/build/_deps/raylib-subbuild/CMakeFiles/raylib-populate
+C:/Users/antoi/Desktop/FOCWorld/focworld-client-cpp/build/_deps/raylib-subbuild/CMakeFiles/d259393351c20f6fe19d12a0569f2b83/raylib-populate.rule
+C:/Users/antoi/Desktop/FOCWorld/focworld-client-cpp/build/_deps/raylib-subbuild/CMakeFiles/dfae5cde98d7c07005ca98b46c1ff65a/raylib-populate-complete.rule
+C:/Users/antoi/Desktop/FOCWorld/focworld-client-cpp/build/_deps/raylib-subbuild/CMakeFiles/63e82b8e4ec699ee724bcbe4765a93b5/raylib-populate-build.rule
+C:/Users/antoi/Desktop/FOCWorld/focworld-client-cpp/build/_deps/raylib-subbuild/CMakeFiles/63e82b8e4ec699ee724bcbe4765a93b5/raylib-populate-configure.rule
+C:/Users/antoi/Desktop/FOCWorld/focworld-client-cpp/build/_deps/raylib-subbuild/CMakeFiles/63e82b8e4ec699ee724bcbe4765a93b5/raylib-populate-download.rule
+C:/Users/antoi/Desktop/FOCWorld/focworld-client-cpp/build/_deps/raylib-subbuild/CMakeFiles/63e82b8e4ec699ee724bcbe4765a93b5/raylib-populate-install.rule
+C:/Users/antoi/Desktop/FOCWorld/focworld-client-cpp/build/_deps/raylib-subbuild/CMakeFiles/63e82b8e4ec699ee724bcbe4765a93b5/raylib-populate-mkdir.rule
+C:/Users/antoi/Desktop/FOCWorld/focworld-client-cpp/build/_deps/raylib-subbuild/CMakeFiles/63e82b8e4ec699ee724bcbe4765a93b5/raylib-populate-patch.rule
+C:/Users/antoi/Desktop/FOCWorld/focworld-client-cpp/build/_deps/raylib-subbuild/CMakeFiles/63e82b8e4ec699ee724bcbe4765a93b5/raylib-populate-test.rule
+C:/Users/antoi/Desktop/FOCWorld/focworld-client-cpp/build/_deps/raylib-subbuild/CMakeFiles/63e82b8e4ec699ee724bcbe4765a93b5/raylib-populate-update.rule

@@ -1,0 +1,36 @@
+name: Build Windows Client
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    env:
+      VCPKG_ROOT: 'C:\vcpkg'
+
+    steps:
+    - uses: actions/checkout@v3
+
+    # On utilise le vcpkg intégré à l'image windows-latest de GitHub Actions
+    # Il est pré-installé dans C:\vcpkg
+    - name: Integrate vcpkg
+      run: vcpkg integrate install
+
+    - name: Configure CMake
+      run: |
+        cmake -B build -S . `
+          -DCMAKE_BUILD_TYPE=Release `
+          -DCMAKE_TOOLCHAIN_FILE="${env:VCPKG_ROOT}\scripts\buildsystems\vcpkg.cmake" `
+          -DUSE_TLS=ON -DUSE_OPEN_SSL=ON -DUSE_MBED_TLS=OFF -DUSE_WS=ON -DUSE_ZLIB=ON
+
+    - name: Build
+      run: cmake --build build --config Release
+
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: focworld_tcg_windows
+        path: build/Release/focworld_tcg.exe

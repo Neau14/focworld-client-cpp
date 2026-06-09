@@ -1,0 +1,10 @@
+^C:\USERS\ANTOI\DESKTOP\FOCWORLD\FOCWORLD-CLIENT-CPP\BUILD\_DEPS\IXWEBSOCKET-SUBBUILD\CMAKEFILES\8CAB2790DDA50D80C93F85D0C305FDE5\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\Microsoft Visual Studio\18\Insiders\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/Users/antoi/Desktop/FOCWorld/focworld-client-cpp/build/_deps/ixwebsocket-subbuild -BC:/Users/antoi/Desktop/FOCWorld/focworld-client-cpp/build/_deps/ixwebsocket-subbuild --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/antoi/Desktop/FOCWorld/focworld-client-cpp/build/_deps/ixwebsocket-subbuild/ixwebsocket-populate.slnx
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

@@ -1,0 +1,9 @@
+{
+  "name": "focworld-client",
+  "version": "1.0.0",
+  "dependencies": [
+    "openssl",
+    "zlib"
+  ],
+  "builtin-baseline": "3426db05b996481ca31e95637da6af084e0a47f1"
+}
