@@ -1,4 +1,7 @@
 #include <raylib.h>
+#ifdef _WIN32
+#include <windows.h>
+#endif
 #include "NetworkManager.h"
 #include "Board.h"
 #include "AutoUpdater.h"
@@ -14,7 +17,42 @@ using json = nlohmann::json;
 #define SERVER_URL "ws://localhost:4000"
 #endif
 
+#ifdef _WIN32
+std::string g_newUriReceived = "";
+bool g_hasNewUri = false;
+WNDPROC g_originalWndProc = nullptr;
+
+LRESULT CALLBACK CustomWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+    if (msg == WM_COPYDATA) {
+        COPYDATASTRUCT* cds = (COPYDATASTRUCT*)lParam;
+        if (cds->dwData == 1) {
+            g_newUriReceived = std::string((char*)cds->lpData);
+            g_hasNewUri = true;
+        }
+        return 1;
+    }
+    return CallWindowProc(g_originalWndProc, hwnd, msg, wParam, lParam);
+}
+#endif
+
 int main(int argc, char* argv[]) {
+#ifdef _WIN32
+    HWND existingHwnd = FindWindowA(NULL, "FOC World TCG - Arene de Combat");
+    if (existingHwnd != NULL) {
+        if (argc > 1) {
+            std::string uri(argv[1]);
+            COPYDATASTRUCT cds;
+            cds.dwData = 1;
+            cds.cbData = uri.length() + 1;
+            cds.lpData = (PVOID)uri.c_str();
+            SendMessage(existingHwnd, WM_COPYDATA, (WPARAM)NULL, (LPARAM)&cds);
+        }
+        ShowWindow(existingHwnd, SW_RESTORE);
+        SetForegroundWindow(existingHwnd);
+        return 0; // Exit this instance
+    }
+#endif
+
     std::string matchId = "Inconnu";
     std::string token = "Inconnu";
 
@@ -85,6 +123,11 @@ int main(int argc, char* argv[]) {
     InitWindow(screenWidth, screenHeight, "FOC World TCG - Arene de Combat");
     SetTargetFPS(60);
 
+#ifdef _WIN32
+    HWND hwnd = (HWND)GetWindowHandle();
+    g_originalWndProc = (WNDPROC)SetWindowLongPtr(hwnd, GWLP_WNDPROC, (LONG_PTR)CustomWndProc);
+#endif
+
     AutoUpdater::Get().CheckForUpdates();
 
     gameBoard.Init(screenWidth, screenHeight);
@@ -94,6 +137,21 @@ int main(int argc, char* argv[]) {
     gameBoard.LoadBackground("C:/Users/antoi/.gemini/antigravity-ide/brain/3ffb3821-ade3-40a3-acde-c983754c32e3/jjk_arena_board_1781000951051.png");
 
     while (!WindowShouldClose()) {
+#ifdef _WIN32
+        if (g_hasNewUri) {
+            std::regex uri_regex(R"(foc-tcg://match/([^?]+)\?token=(.+))");
+            std::smatch match;
+            if (std::regex_search(g_newUriReceived, match, uri_regex)) {
+                matchId = match[1].str();
+                token = match[2].str();
+                NetworkManager::Get().Connect(serverUrl, matchId, token);
+                matchStarted = false; // Reset to wait for matchmaking
+            }
+            g_hasNewUri = false;
+            g_newUriReceived = "";
+        }
+#endif
+
         float dt = GetFrameTime();
         NetworkManager::Get().Update();
         gameBoard.Update(dt);
