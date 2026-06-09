@@ -1,6 +1,7 @@
 #include <raylib.h>
 #include "NetworkManager.h"
 #include "Board.h"
+#include "AutoUpdater.h"
 #include <nlohmann/json.hpp>
 #include <iostream>
 #include <string>
@@ -84,6 +85,8 @@ int main(int argc, char* argv[]) {
     InitWindow(screenWidth, screenHeight, "FOC World TCG - Arene de Combat");
     SetTargetFPS(60);
 
+    AutoUpdater::Get().CheckForUpdates();
+
     gameBoard.Init(screenWidth, screenHeight);
     
     // Charger l'image de fond depuis l'artifact (assurez-vous du chemin ou copiez-le dans le dossier du jeu)
@@ -97,14 +100,32 @@ int main(int argc, char* argv[]) {
 
         BeginDrawing();
         
-        gameBoard.Draw();
+        UpdaterState state = AutoUpdater::Get().GetState();
+        if (state != UpdaterState::UP_TO_DATE && state != UpdaterState::IDLE && state != UpdaterState::FAILED) {
+            ClearBackground(DARKGRAY);
+            if (state == UpdaterState::CHECKING) {
+                DrawText("Recherche de mises a jour...", screenWidth / 2 - 200, screenHeight / 2, 30, LIGHTGRAY);
+            } else if (state == UpdaterState::UPDATE_AVAILABLE) {
+                DrawText("Mise a jour disponible ! Telechargement en cours...", screenWidth / 2 - 350, screenHeight / 2, 30, YELLOW);
+                AutoUpdater::Get().StartDownload();
+            } else if (state == UpdaterState::DOWNLOADING) {
+                DrawText("Telechargement de la mise a jour en cours...", screenWidth / 2 - 300, screenHeight / 2, 30, ORANGE);
+            } else if (state == UpdaterState::READY_TO_INSTALL) {
+                DrawText("Pret a installer ! Le jeu va redemarrer...", screenWidth / 2 - 300, screenHeight / 2, 30, GREEN);
+                EndDrawing();
+                AutoUpdater::Get().InstallAndExit();
+                continue;
+            }
+        } else {
+            gameBoard.Draw();
 
-        if (!matchStarted) {
-            DrawRectangle(0, 0, screenWidth, screenHeight, Fade(BLACK, 0.7f));
-            if (NetworkManager::Get().IsConnected()) {
-                DrawText("EN ATTENTE DU MATCHMAKING...", screenWidth / 2 - 200, screenHeight / 2, 30, GREEN);
-            } else {
-                DrawText("CONNEXION AU SERVEUR...", screenWidth / 2 - 200, screenHeight / 2, 30, ORANGE);
+            if (!matchStarted) {
+                DrawRectangle(0, 0, screenWidth, screenHeight, Fade(BLACK, 0.7f));
+                if (NetworkManager::Get().IsConnected()) {
+                    DrawText("EN ATTENTE DU MATCHMAKING...", screenWidth / 2 - 200, screenHeight / 2, 30, GREEN);
+                } else {
+                    DrawText("CONNEXION AU SERVEUR...", screenWidth / 2 - 200, screenHeight / 2, 30, ORANGE);
+                }
             }
         }
 

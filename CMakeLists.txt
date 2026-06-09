@@ -49,11 +49,11 @@ file(GLOB_RECURSE SOURCES "src/*.cpp")
 # --- Exécutable ---
 # L'exécutable est WIN32 sous Windows pour éviter la console en arrière-plan (en prod)
 # mais on peut la garder pour le debug pour le moment
-add_executable(focworld_tcg src/main.cpp src/NetworkManager.cpp src/Board.cpp)
+add_executable(focworld_tcg src/main.cpp src/NetworkManager.cpp src/Board.cpp src/AutoUpdater.cpp)
 
 # --- Includes et Lier Raylib & IXWebSocket ---
 target_include_directories(${PROJECT_NAME} PRIVATE src)
-target_link_libraries(focworld_tcg PUBLIC raylib ixwebsocket spdlog::spdlog nlohmann_json::nlohmann_json)
+target_link_libraries(focworld_tcg PUBLIC raylib ixwebsocket spdlog::spdlog nlohmann_json::nlohmann_json urlmon)
 
 # Définir l'URL du serveur en fonction du type de build
 if (CMAKE_BUILD_TYPE STREQUAL "Release")
