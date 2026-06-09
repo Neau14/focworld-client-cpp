@@ -56,9 +56,9 @@ file(GLOB_RECURSE SOURCES "src/*.cpp")
 # L'exécutable est WIN32 sous Windows pour éviter la console en arrière-plan (en prod)
 # mais on peut la garder pour le debug pour le moment
 if(WIN32)
-    add_executable(focworld_tcg src/main.cpp src/NetworkManager.cpp src/Board.cpp src/AutoUpdater.cpp src/resource.rc)
+    add_executable(focworld_tcg src/main.cpp src/NetworkManager.cpp src/Board.cpp src/AutoUpdater.cpp src/WindowsUtils.cpp src/resource.rc)
 else()
-    add_executable(focworld_tcg src/main.cpp src/NetworkManager.cpp src/Board.cpp src/AutoUpdater.cpp)
+    add_executable(focworld_tcg src/main.cpp src/NetworkManager.cpp src/Board.cpp src/AutoUpdater.cpp src/WindowsUtils.cpp)
 endif()
 
 # --- Includes et Lier Raylib & IXWebSocket ---

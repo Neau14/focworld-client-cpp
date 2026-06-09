@@ -1,6 +1,6 @@
 #include <raylib.h>
 #ifdef _WIN32
-#include <windows.h>
+#include "WindowsUtils.h"
 #endif
 #include "NetworkManager.h"
 #include "Board.h"
@@ -17,40 +17,9 @@ using json = nlohmann::json;
 #define SERVER_URL "ws://localhost:4000"
 #endif
 
-#ifdef _WIN32
-std::string g_newUriReceived = "";
-bool g_hasNewUri = false;
-WNDPROC g_originalWndProc = nullptr;
-
-LRESULT CALLBACK CustomWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
-    if (msg == WM_COPYDATA) {
-        COPYDATASTRUCT* cds = (COPYDATASTRUCT*)lParam;
-        if (cds->dwData == 1) {
-            g_newUriReceived = std::string((char*)cds->lpData);
-            g_hasNewUri = true;
-        }
-        return 1;
-    }
-    return CallWindowProc(g_originalWndProc, hwnd, msg, wParam, lParam);
-}
-#endif
-
 int main(int argc, char* argv[]) {
 #ifdef _WIN32
-    HWND existingHwnd = FindWindowA(NULL, "FOC World TCG - Arene de Combat");
-    if (existingHwnd != NULL) {
-        if (argc > 1) {
-            std::string uri(argv[1]);
-            COPYDATASTRUCT cds;
-            cds.dwData = 1;
-            cds.cbData = uri.length() + 1;
-            cds.lpData = (PVOID)uri.c_str();
-            SendMessage(existingHwnd, WM_COPYDATA, (WPARAM)NULL, (LPARAM)&cds);
-        }
-        ShowWindow(existingHwnd, SW_RESTORE);
-        SetForegroundWindow(existingHwnd);
-        return 0; // Exit this instance
-    }
+    Windows_CheckSingleInstance(argc, argv);
 #endif
 
     std::string matchId = "Inconnu";
@@ -124,8 +93,7 @@ int main(int argc, char* argv[]) {
     SetTargetFPS(60);
 
 #ifdef _WIN32
-    HWND hwnd = (HWND)GetWindowHandle();
-    g_originalWndProc = (WNDPROC)SetWindowLongPtr(hwnd, GWLP_WNDPROC, (LONG_PTR)CustomWndProc);
+    Windows_SetupCustomWndProc();
 #endif
 
     AutoUpdater::Get().CheckForUpdates();
@@ -138,17 +106,17 @@ int main(int argc, char* argv[]) {
 
     while (!WindowShouldClose()) {
 #ifdef _WIN32
-        if (g_hasNewUri) {
+        if (Windows_HasNewUri()) {
+            std::string newUriReceived = Windows_GetNewUri();
             std::regex uri_regex(R"(foc-tcg://match/([^?]+)\?token=(.+))");
             std::smatch match;
-            if (std::regex_search(g_newUriReceived, match, uri_regex)) {
+            if (std::regex_search(newUriReceived, match, uri_regex)) {
                 matchId = match[1].str();
                 token = match[2].str();
                 NetworkManager::Get().Connect(serverUrl, matchId, token);
                 matchStarted = false; // Reset to wait for matchmaking
             }
-            g_hasNewUri = false;
-            g_newUriReceived = "";
+            Windows_ClearNewUri();
         }
 #endif
 
