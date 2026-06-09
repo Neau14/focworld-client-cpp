@@ -31,11 +31,17 @@ if (CMAKE_BUILD_TYPE STREQUAL "Release")
 endif()
 
 # --- IXWebSocket FetchContent ---
-set(USE_TLS OFF CACHE BOOL "" FORCE) # Désactivé pour le dév local
-set(USE_OPEN_SSL OFF CACHE BOOL "" FORCE)
+if (CMAKE_BUILD_TYPE STREQUAL "Release")
+    set(USE_TLS ON CACHE BOOL "" FORCE)
+    set(USE_OPEN_SSL ON CACHE BOOL "" FORCE)
+    set(USE_ZLIB ON CACHE BOOL "" FORCE)
+else()
+    set(USE_TLS OFF CACHE BOOL "" FORCE) # Désactivé pour le dév local
+    set(USE_OPEN_SSL OFF CACHE BOOL "" FORCE)
+    set(USE_ZLIB OFF CACHE BOOL "" FORCE)
+endif()
 set(USE_MBED_TLS OFF CACHE BOOL "" FORCE)
 set(USE_WS ON CACHE BOOL "" FORCE)
-set(USE_ZLIB OFF CACHE BOOL "" FORCE)
 FetchContent_Declare(
   ixwebsocket
   GIT_REPOSITORY https://github.com/machinezone/IXWebSocket.git
