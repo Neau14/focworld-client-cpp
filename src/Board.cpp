@@ -16,7 +16,7 @@ void Board::Init(int screenWidth, int screenHeight) {
 }
 
 void Board::LoadBackground(const std::string& path) {
-    m_background = LoadTexture(path.c_str());
+    m_background = LoadTexture("assets/background.png");
 }
 
 void Board::SetPlayerCards(const std::vector<Card>& cards) {

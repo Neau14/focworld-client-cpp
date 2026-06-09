@@ -18,7 +18,7 @@ jobs:
     - name: Integrate vcpkg
       run: |
         vcpkg integrate install
-        vcpkg install openssl zlib
+        vcpkg install openssl:x64-windows zlib:x64-windows
 
     - name: Configure CMake
       run: |
@@ -34,4 +34,6 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: focworld_tcg_windows
-        path: build/Release/focworld_tcg.exe
+        path: |
+          build/Release/focworld_tcg.exe
+          assets/

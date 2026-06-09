@@ -26,6 +26,10 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(raylib)
 
+if (CMAKE_BUILD_TYPE STREQUAL "Release")
+    find_package(OpenSSL REQUIRED)
+endif()
+
 # --- IXWebSocket FetchContent ---
 set(USE_TLS OFF CACHE BOOL "" FORCE) # Désactivé pour le dév local
 set(USE_OPEN_SSL OFF CACHE BOOL "" FORCE)
