@@ -24,17 +24,16 @@ void AutoUpdater::CheckForUpdates() {
 
     m_workerThread = std::thread([this]() {
         ix::HttpClient httpClient;
-        ix::HttpRequestArgs args;
-        auto response = httpClient.get("https://pub-7bd6715a1810463a94e5194e6ed940dd.r2.dev/version.json", args);
+        auto response = httpClient.get("https://pub-7bd6715a1810463a94e5194e6ed940dd.r2.dev/version.json");
 
-        if (response->statusCode != 200) {
+        if (!response || response->statusCode != 200) {
             std::cout << "Aucune mise a jour trouvee ou erreur reseau." << std::endl;
             m_state = UpdaterState::UP_TO_DATE;
             return;
         }
 
         try {
-            json data = json::parse(response->payload);
+            json data = json::parse(response->body);
             std::string latestVersion = data.value("version", CURRENT_APP_VERSION);
             
             if (latestVersion != CURRENT_APP_VERSION) {
