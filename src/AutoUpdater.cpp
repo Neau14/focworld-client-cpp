@@ -24,7 +24,8 @@ void AutoUpdater::CheckForUpdates() {
 
     m_workerThread = std::thread([this]() {
         ix::HttpClient httpClient;
-        auto response = httpClient.get("https://pub-7bd6715a1810463a94e5194e6ed940dd.r2.dev/version.json");
+        auto args = httpClient.createRequest();
+        auto response = httpClient.get("https://pub-7bd6715a1810463a94e5194e6ed940dd.r2.dev/version.json", args);
 
         if (!response || response->statusCode != 200) {
             std::cout << "Aucune mise a jour trouvee ou erreur reseau." << std::endl;
