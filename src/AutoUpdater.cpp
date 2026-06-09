@@ -9,7 +9,7 @@
 
 using json = nlohmann::json;
 
-#define CURRENT_APP_VERSION "1.0.0"
+#define CURRENT_APP_VERSION "1.0.1"
 
 AutoUpdater& AutoUpdater::Get() {
     static AutoUpdater instance;
