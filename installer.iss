@@ -1,6 +1,6 @@
 #define MyAppName "FOCWorld TCG"
 #define MyAppVersion "1.0.0"
-#define MyAppPublisher "FOCWorld"
+#define MyAppPublisher "FOC JJK (by Neau)"
 #define MyAppExeName "focworld_tcg.exe"
 
 [Setup]
