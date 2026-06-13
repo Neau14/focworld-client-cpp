@@ -9,7 +9,7 @@
 
 using json = nlohmann::json;
 
-#define CURRENT_APP_VERSION "1.0.3"
+#define CURRENT_APP_VERSION "1.0.4"
 
 AutoUpdater& AutoUpdater::Get() {
     static AutoUpdater instance;
@@ -37,7 +37,8 @@ void AutoUpdater::CheckForUpdates() {
             json data = json::parse(response->body);
             std::string latestVersion = data.value("version", CURRENT_APP_VERSION);
             
-            if (latestVersion != CURRENT_APP_VERSION) {
+            // On ne met à jour que si la version du serveur est STRICTEMENT supérieure
+            if (latestVersion > std::string(CURRENT_APP_VERSION)) {
                 m_setupUrl = data.value("url", "");
                 if (!m_setupUrl.empty()) {
                     m_state = UpdaterState::UPDATE_AVAILABLE;
@@ -85,6 +86,7 @@ void AutoUpdater::InstallAndExit() {
         std::string cmdArgs = "/C ping 127.0.0.1 -n 2 > nul & start \"\" \"" + m_tempSetupPath + "\" /SILENT";
         ShellExecuteA(NULL, "open", "cmd.exe", cmdArgs.c_str(), NULL, SW_HIDE);
         
-        exit(0);
+        // TerminateProcess évite la destruction des singletons/threads et les crashs (0xc0000043)
+        TerminateProcess(GetCurrentProcess(), 0);
     }
 }
