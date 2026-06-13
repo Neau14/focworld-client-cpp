@@ -70,6 +70,21 @@ int main(int argc, char* argv[]) {
                     }
                     c.energyOccult = item.value("currentEnergy", 0);
                     c.imageUrl = item.value("imageUrl", "");
+                    
+                    if (item.contains("techniques") && item["techniques"].is_array()) {
+                        int i = 0;
+                        for (auto& t : item["techniques"]) {
+                            if (i < 4) {
+                                if (t.is_null()) {
+                                    c.techniques[i] = "";
+                                } else {
+                                    c.techniques[i] = t.value("name", "");
+                                }
+                            }
+                            i++;
+                        }
+                    }
+                    
                     return c;
                 };
 
@@ -188,7 +203,7 @@ int main(int argc, char* argv[]) {
                 continue;
             }
         } else {
-            gameBoard.Draw();
+            gameBoard.Draw(matchStarted);
 
             if (!matchStarted) {
                 DrawRectangle(0, 0, screenWidth, screenHeight, Fade(BLACK, 0.7f));

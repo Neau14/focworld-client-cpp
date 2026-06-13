@@ -12,7 +12,7 @@ public:
 
     void Init(int screenWidth, int screenHeight);
     void Update(float deltaTime);
-    void Draw();
+    void Draw(bool drawUI = true);
 
     void LoadBackground(const std::string& path);
     void SetPlayerCards(const std::vector<Card>& cards);

@@ -78,6 +78,10 @@ Board::PlayerAction Board::GetClickedAction() const {
     for (int i = 0; i < 4; ++i) {
         Rectangle btn = { startX + i * 110, startY, 100, 40 };
         if (CheckCollisionPointRec(mousePos, btn)) {
+            // Ignorer si la technique est vide
+            if (m_playerCards.size() > 0 && m_playerCards[0].techniques[i].empty()) {
+                continue;
+            }
             return {"attack", i};
         }
     }
@@ -114,7 +118,7 @@ void Board::DrawCard(const Card& card) {
     DrawText(TextFormat("NRG: %d", card.energyOccult), x + 120 * card.scale, y + height - 40 * card.scale, 18 * card.scale, PURPLE);
 }
 
-void Board::Draw() {
+void Board::Draw(bool drawUI) {
     if (m_background.id != 0) {
         // Dessiner le fond (étiré)
         DrawTexturePro(m_background, 
@@ -132,6 +136,8 @@ void Board::Draw() {
         DrawCard(card);
     }
 
+    if (!drawUI || m_playerCards.empty()) return;
+
     // UI Panel (fond)
     DrawRectangle(0, m_screenHeight - 120, m_screenWidth, 120, {20, 20, 30, 220});
     DrawLine(0, m_screenHeight - 120, m_screenWidth, m_screenHeight - 120, RAYWHITE);
@@ -140,13 +146,32 @@ void Board::Draw() {
     float startX = m_screenWidth / 2.0f - 200.0f;
     float startY = m_screenHeight - 100.0f;
     DrawText("Techniques", startX, startY - 25, 20, RAYWHITE);
+    
     for (int i = 0; i < 4; ++i) {
         Rectangle btn = { startX + i * 110, startY, 100, 40 };
         Vector2 mousePos = GetMousePosition();
-        Color btnColor = CheckCollisionPointRec(mousePos, btn) ? RED : DARKGRAY;
+        
+        std::string tName = m_playerCards[0].techniques[i];
+        bool isEmpty = tName.empty();
+        
+        Color btnColor;
+        if (isEmpty) {
+            btnColor = {60, 60, 60, 255}; // Grisé
+        } else {
+            btnColor = CheckCollisionPointRec(mousePos, btn) ? RED : DARKGRAY;
+        }
+        
         DrawRectangleRec(btn, btnColor);
-        DrawRectangleLinesEx(btn, 2, RAYWHITE);
-        DrawText(TextFormat("Atk %d", i + 1), btn.x + 25, btn.y + 10, 20, RAYWHITE);
+        DrawRectangleLinesEx(btn, 2, isEmpty ? GRAY : RAYWHITE);
+        
+        if (isEmpty) {
+            DrawLineEx({btn.x, btn.y}, {btn.x + btn.width, btn.y + btn.height}, 2, RED); // Barré
+            DrawText("Vide", btn.x + 30, btn.y + 12, 16, GRAY);
+        } else {
+            // Tronquer le nom si trop long
+            std::string dispName = tName.length() > 8 ? tName.substr(0, 6) + ".." : tName;
+            DrawText(dispName.c_str(), btn.x + 10, btn.y + 12, 16, RAYWHITE);
+        }
     }
 
     // Dessiner les boutons de switch
@@ -155,9 +180,26 @@ void Board::Draw() {
     for (int i = 0; i < 3; ++i) {
         Rectangle btn = { switchStartX + i * 110, startY, 100, 40 };
         Vector2 mousePos = GetMousePosition();
-        Color btnColor = CheckCollisionPointRec(mousePos, btn) ? BLUE : DARKGRAY;
+        
+        bool canSwitch = (i + 1) < m_playerCards.size();
+        Color btnColor;
+        
+        if (!canSwitch) {
+            btnColor = {60, 60, 60, 255};
+        } else {
+            btnColor = CheckCollisionPointRec(mousePos, btn) ? BLUE : DARKGRAY;
+        }
+        
         DrawRectangleRec(btn, btnColor);
-        DrawRectangleLinesEx(btn, 2, RAYWHITE);
-        DrawText(TextFormat("P%d", i + 2), btn.x + 35, btn.y + 10, 20, RAYWHITE);
+        DrawRectangleLinesEx(btn, 2, canSwitch ? RAYWHITE : GRAY);
+        
+        if (canSwitch) {
+            std::string cName = m_playerCards[i + 1].name;
+            std::string dispName = cName.length() > 8 ? cName.substr(0, 6) + ".." : cName;
+            DrawText(dispName.c_str(), btn.x + 10, btn.y + 12, 16, RAYWHITE);
+        } else {
+            DrawLineEx({btn.x, btn.y}, {btn.x + btn.width, btn.y + btn.height}, 2, GRAY); // Barré
+            DrawText("Vide", btn.x + 30, btn.y + 12, 16, GRAY);
+        }
     }
 }
