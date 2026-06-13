@@ -9,7 +9,7 @@
 
 using json = nlohmann::json;
 
-#define CURRENT_APP_VERSION "1.0.2"
+#define CURRENT_APP_VERSION "1.0.3"
 
 AutoUpdater& AutoUpdater::Get() {
     static AutoUpdater instance;
@@ -51,6 +51,7 @@ void AutoUpdater::CheckForUpdates() {
             m_state = UpdaterState::UP_TO_DATE; // Fallback
         }
     });
+    m_workerThread.detach();
 }
 
 void AutoUpdater::StartDownload() {
@@ -72,11 +73,18 @@ void AutoUpdater::StartDownload() {
             m_state = UpdaterState::FAILED;
         }
     });
+    m_workerThread.detach();
 }
 
 void AutoUpdater::InstallAndExit() {
     if (m_state == UpdaterState::READY_TO_INSTALL) {
-        ShellExecuteA(NULL, "open", m_tempSetupPath.c_str(), "/SILENT", NULL, SW_SHOWNORMAL);
+        m_state = UpdaterState::IDLE; // Empêcher un double appel
+        
+        // On lance un cmd qui attend 2 secondes pour laisser l'app se fermer, 
+        // puis qui lance l'installeur silencieuxement
+        std::string cmdArgs = "/C ping 127.0.0.1 -n 2 > nul & start \"\" \"" + m_tempSetupPath + "\" /SILENT";
+        ShellExecuteA(NULL, "open", "cmd.exe", cmdArgs.c_str(), NULL, SW_HIDE);
+        
         exit(0);
     }
 }
