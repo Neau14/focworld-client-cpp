@@ -18,6 +18,13 @@ public:
     void SetPlayerCards(const std::vector<Card>& cards);
     void SetOpponentCards(const std::vector<Card>& cards);
 
+    struct PlayerAction {
+        std::string type; // "none", "attack", "switch"
+        int index; // techniqueIndex or switchToIndex
+    };
+
+    PlayerAction GetClickedAction() const;
+
 private:
     int m_screenWidth;
     int m_screenHeight;

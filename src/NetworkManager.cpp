@@ -1,6 +1,9 @@
 #include "NetworkManager.h"
 #include <ixwebsocket/IXNetSystem.h>
 #include <iostream>
+#include <nlohmann/json.hpp>
+
+using json = nlohmann::json;
 
 NetworkManager& NetworkManager::Get() {
     static NetworkManager instance;
@@ -44,11 +47,17 @@ void NetworkManager::SetupCallbacks() {
         else if (msg->type == ix::WebSocketMessageType::Message) {
             std::cout << "Message recu: " << msg->str << std::endl;
             
-            // On peut rajouter une lib JSON comme nlohmann/json plus tard.
-            // Pour l'instant on passe tout au callback.
             if (onMessageCallback) {
-                // Parse très basique pour extraire type et data (à améliorer en prod avec nlohmann)
-                onMessageCallback("raw", msg->str);
+                try {
+                    json parsed = json::parse(msg->str);
+                    std::string msgType = parsed.value("type", "unknown");
+                    // On extrait la partie 'data' sous forme de string pour le callback
+                    std::string dataStr = parsed.contains("data") ? parsed["data"].dump() : "{}";
+                    onMessageCallback(msgType, dataStr);
+                } catch (const std::exception& e) {
+                    std::cerr << "Erreur de parsing du message WebSocket: " << e.what() << std::endl;
+                    onMessageCallback("raw", msg->str); // Fallback
+                }
             }
         }
         else if (msg->type == ix::WebSocketMessageType::Error) {

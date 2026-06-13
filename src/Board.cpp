@@ -68,6 +68,32 @@ void Board::Update(float deltaTime) {
     }
 }
 
+Board::PlayerAction Board::GetClickedAction() const {
+    if (!IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) return {"none", -1};
+    Vector2 mousePos = GetMousePosition();
+
+    // Boutons d'attaque (milieu bas)
+    float startX = m_screenWidth / 2.0f - 200.0f;
+    float startY = m_screenHeight - 100.0f;
+    for (int i = 0; i < 4; ++i) {
+        Rectangle btn = { startX + i * 110, startY, 100, 40 };
+        if (CheckCollisionPointRec(mousePos, btn)) {
+            return {"attack", i};
+        }
+    }
+
+    // Boutons de switch (droite bas)
+    float switchStartX = m_screenWidth - 350.0f;
+    for (int i = 0; i < 3; ++i) { // max 3 switch dispo
+        Rectangle btn = { switchStartX + i * 110, startY, 100, 40 };
+        if (CheckCollisionPointRec(mousePos, btn)) {
+            return {"switch", i + 1}; // index 0 est l'actif, on switch sur 1, 2 ou 3
+        }
+    }
+
+    return {"none", -1};
+}
+
 void Board::DrawCard(const Card& card) {
     float width = 200 * card.scale;
     float height = 300 * card.scale;
@@ -104,5 +130,34 @@ void Board::Draw() {
     }
     for (const auto& card : m_playerCards) {
         DrawCard(card);
+    }
+
+    // UI Panel (fond)
+    DrawRectangle(0, m_screenHeight - 120, m_screenWidth, 120, {20, 20, 30, 220});
+    DrawLine(0, m_screenHeight - 120, m_screenWidth, m_screenHeight - 120, RAYWHITE);
+
+    // Dessiner les boutons d'attaques
+    float startX = m_screenWidth / 2.0f - 200.0f;
+    float startY = m_screenHeight - 100.0f;
+    DrawText("Techniques", startX, startY - 25, 20, RAYWHITE);
+    for (int i = 0; i < 4; ++i) {
+        Rectangle btn = { startX + i * 110, startY, 100, 40 };
+        Vector2 mousePos = GetMousePosition();
+        Color btnColor = CheckCollisionPointRec(mousePos, btn) ? RED : DARKGRAY;
+        DrawRectangleRec(btn, btnColor);
+        DrawRectangleLinesEx(btn, 2, RAYWHITE);
+        DrawText(TextFormat("Atk %d", i + 1), btn.x + 25, btn.y + 10, 20, RAYWHITE);
+    }
+
+    // Dessiner les boutons de switch
+    float switchStartX = m_screenWidth - 350.0f;
+    DrawText("Switch Perso", switchStartX, startY - 25, 20, RAYWHITE);
+    for (int i = 0; i < 3; ++i) {
+        Rectangle btn = { switchStartX + i * 110, startY, 100, 40 };
+        Vector2 mousePos = GetMousePosition();
+        Color btnColor = CheckCollisionPointRec(mousePos, btn) ? BLUE : DARKGRAY;
+        DrawRectangleRec(btn, btnColor);
+        DrawRectangleLinesEx(btn, 2, RAYWHITE);
+        DrawText(TextFormat("P%d", i + 2), btn.x + 35, btn.y + 10, 20, RAYWHITE);
     }
 }

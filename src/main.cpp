@@ -41,37 +41,47 @@ int main(int argc, char* argv[]) {
     bool matchStarted = false;
     
     NetworkManager::Get().OnMessageReceived([&](const std::string& type, const std::string& data) {
-        if (type == "match_found") {
+        if (type == "match_found" || type == "game_state" || type == "round_result") {
             try {
                 json payload = json::parse(data);
+                json gameState = payload;
+                
+                // Si c'est match_found ou round_result, le gameState est imbriqué
+                if (payload.contains("gameState")) {
+                    gameState = payload["gameState"];
+                }
+                
                 std::vector<Card> playerCards;
                 std::vector<Card> opponentCards;
 
-                // On simule le parsing des decks
-                // Le payload contient { playerDeck: [...], opponentDeck: [...] }
-                if (payload.contains("playerDeck")) {
-                    for (auto& item : payload["playerDeck"]) {
-                        Card c;
-                        c.name = item.value("name", "Inconnu");
-                        c.hp = item.value("health", 100);
-                        c.maxHp = c.hp;
-                        c.attack = item.value("strength", 10);
+                auto parseCard = [](const json& item) -> Card {
+                    Card c;
+                    c.id = item.value("id", "");
+                    c.name = item.value("name", "Inconnu");
+                    c.hp = item.value("currentHp", 100);
+                    c.maxHp = item.value("maxHp", 100);
+                    
+                    if (item.contains("stats")) {
+                        c.attack = item["stats"].value("atk", 10);
+                        c.speed = item["stats"].value("spd", 10);
+                    } else {
+                        c.attack = item.value("strength", 10); // legacy fallback
                         c.speed = item.value("speed", 10);
-                        c.energyOccult = item.value("cursedEnergy", 0);
-                        playerCards.push_back(c);
+                    }
+                    c.energyOccult = item.value("currentEnergy", 0);
+                    c.imageUrl = item.value("imageUrl", "");
+                    return c;
+                };
+
+                if (gameState.contains("myDeck")) {
+                    for (auto& item : gameState["myDeck"]) {
+                        playerCards.push_back(parseCard(item));
                     }
                 }
                 
-                if (payload.contains("opponentDeck")) {
-                    for (auto& item : payload["opponentDeck"]) {
-                        Card c;
-                        c.name = item.value("name", "Inconnu");
-                        c.hp = item.value("health", 100);
-                        c.maxHp = c.hp;
-                        c.attack = item.value("strength", 10);
-                        c.speed = item.value("speed", 10);
-                        c.energyOccult = item.value("cursedEnergy", 0);
-                        opponentCards.push_back(c);
+                if (gameState.contains("opponentDeck")) {
+                    for (auto& item : gameState["opponentDeck"]) {
+                        opponentCards.push_back(parseCard(item));
                     }
                 }
 
@@ -80,7 +90,16 @@ int main(int argc, char* argv[]) {
                 matchStarted = true;
 
             } catch (const std::exception& e) {
-                std::cerr << "JSON Parse error: " << e.what() << "\n";
+                std::cerr << "JSON Parse error (" << type << "): " << e.what() << "\nData: " << data << "\n";
+            }
+        }
+        else if (type == "game_end") {
+            try {
+                json payload = json::parse(data);
+                std::cout << "Le match est terminé ! Vainqueur : " << payload.value("winnerId", "Inconnu") << std::endl;
+                // TODO: Afficher l'écran de fin
+            } catch (const std::exception& e) {
+                std::cerr << "JSON Parse error (game_end): " << e.what() << "\n";
             }
         }
     });
@@ -123,6 +142,32 @@ int main(int argc, char* argv[]) {
         float dt = GetFrameTime();
         NetworkManager::Get().Update();
         gameBoard.Update(dt);
+
+        if (matchStarted) {
+            Board::PlayerAction pAction = gameBoard.GetClickedAction();
+            if (pAction.type != "none") {
+                json action;
+                if (pAction.type == "attack") {
+                    action = {
+                        {"type", "attack"},
+                        {"techniqueIndex", pAction.index}
+                    };
+                    std::cout << "Action envoyee : attaque (technique " << pAction.index << ")" << std::endl;
+                } else if (pAction.type == "switch") {
+                    action = {
+                        {"type", "switch"},
+                        {"switchToIndex", pAction.index}
+                    };
+                    std::cout << "Action envoyee : switch sur carte " << pAction.index << std::endl;
+                }
+                
+                json payload = {
+                    {"matchId", matchId},
+                    {"action", action}
+                };
+                NetworkManager::Get().SendJSON("select_action", payload.dump());
+            }
+        }
 
         BeginDrawing();
         
