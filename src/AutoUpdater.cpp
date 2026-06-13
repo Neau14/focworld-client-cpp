@@ -9,7 +9,7 @@
 
 using json = nlohmann::json;
 
-#define CURRENT_APP_VERSION "1.0.5"
+#define CURRENT_APP_VERSION "1.0.6"
 
 AutoUpdater& AutoUpdater::Get() {
     static AutoUpdater instance;
@@ -25,7 +25,10 @@ void AutoUpdater::CheckForUpdates() {
     m_workerThread = std::thread([this]() {
         ix::HttpClient httpClient;
         auto args = httpClient.createRequest();
-        auto response = httpClient.get("https://pub-7bd6715a1810463a94e5194e6ed940dd.r2.dev/version.json", args);
+        
+        // Ajouter un timestamp pour contourner le cache CDN
+        std::string ts = std::to_string(GetTickCount());
+        auto response = httpClient.get("https://pub-7bd6715a1810463a94e5194e6ed940dd.r2.dev/version.json?t=" + ts, args);
 
         if (!response || response->statusCode != 200) {
             std::cout << "Aucune mise a jour trouvee ou erreur reseau." << std::endl;
@@ -66,7 +69,10 @@ void AutoUpdater::StartDownload() {
         GetTempPathA(MAX_PATH, tempPath);
         m_tempSetupPath = std::string(tempPath) + "FOCWorld_TCG_Update.exe";
 
-        HRESULT hr = URLDownloadToFileA(NULL, m_setupUrl.c_str(), m_tempSetupPath.c_str(), 0, NULL);
+        // Ajouter un timestamp pour forcer le téléchargement et ignorer le cache local IE
+        std::string finalUrl = m_setupUrl + "?t=" + std::to_string(GetTickCount());
+
+        HRESULT hr = URLDownloadToFileA(NULL, finalUrl.c_str(), m_tempSetupPath.c_str(), 0, NULL);
         if (hr == S_OK) {
             m_state = UpdaterState::READY_TO_INSTALL;
         } else {
